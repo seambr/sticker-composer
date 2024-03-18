@@ -9,7 +9,15 @@ canvas.height = canvasContainer.getBoundingClientRect().height
 const stickerSearchInput = document.getElementById("stickerSearch")
 const stickerSearchButton = document.getElementById("stickerSearchBtn")
 const searchResultDiv = document.getElementById("search-result-div")
-stickerSearchButton.addEventListener("click", handleSearchStickerChange)
+stickerSearchButton.addEventListener("click", (e)=>{
+  handleSearchStickerChange(e)
+  stickerSearchInput = null
+  updateSelectedImageInfo()
+})
+stickerSearchInput.addEventListener("focus",(e)=>{
+  stickerSearchInput = null
+  updateSelectedImageInfo()
+})
 
 let images = []
 let selectedImageIndex = null
@@ -17,7 +25,7 @@ let offsetX, offsetY
 let rotationPrecision = 1
 
 function handleSearchStickerChange(e) {
-  console.log("CALLED")
+  
   const searchValue = stickerSearchInput.value.toLowerCase()
 
   if (searchValue && searchValue !== null && searchValue !== "") {
